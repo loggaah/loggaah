@@ -1,0 +1,33 @@
+{
+  "processors": {
+      "formatter": {
+        "format": "%m%n"
+      }
+  },
+  "appenders": {
+    "STDOUT": {
+      "type": "console",
+      "processor": "formatter",
+      "color": false
+    },
+    "appLog": {
+      "type": "file",
+      "processor": [ "formatter" ],
+      "rollover": {
+        "size": "100MB",
+        "pattern": "yyyy-MM-dd"
+      }
+    }
+  },
+  "loggers": {
+    "testLogger": {
+      "level": "DEBUG",
+      "match": "lib/.*",
+      "appender": [ "STDOUT" ]
+    }
+  },
+  "root": {
+    "level": "info",
+    "appender": "STDOUT"
+  }
+}

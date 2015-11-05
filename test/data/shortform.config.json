@@ -1,0 +1,22 @@
+{
+  "processors": "formatter",
+  "appenders": {
+    "console": "console",
+    "file1": {
+      "type": "file",
+      "processor": "%m%n",
+      "filename": "logs/{yyyy-MM-dd}.log"
+    },
+    "file2": {
+      "type": "file",
+      "processor": "%m%n",
+      "filename": "logs/server.log",
+      "rollover": "100MB"
+    },
+    "file3": "logs/server.log"
+  },
+  "root": {
+    "level": "info",
+    "appender": "console, file1"
+  }
+}

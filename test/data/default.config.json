@@ -1,0 +1,18 @@
+{
+  "processors": {
+    "formatter": {
+      "format": "%m%n"
+    }
+  },
+  "appenders": {
+    "console": {
+      "processor": "formatter",
+      "type": "console",
+      "color": true
+    }
+  },
+  "root": {
+    "appender": "console",
+    "level": "info"
+  }
+}
