@@ -35,6 +35,9 @@
   },
   "scripts": {
     "test": "istanbul cover _mocha",
-	"test-travis": "istanbul cover _mocha --report lcovonly -- -R spec"
+    "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec"
+  },
+  "dependencies": {
+    "lodash": "^3.10.1"
   }
 }
