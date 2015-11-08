@@ -2,7 +2,9 @@
 
 var _ = require('lodash');
 
-var Logger = require("./lib/Logger.class.js");
+var Logger = require('./lib/Logger.class');
+var Level = require('./lib/Level.class');
+var MDC = require('./lib/MDC.class');
 
 var fileRegex = /[\w\.]+:/;
 
@@ -20,6 +22,7 @@ class Main {
             name = param2;
         }
         if (!name || _.trim(name) == '') {
+            // TODO this shoud include a relative path to the root of the project (try to compare process.args to this path)
             var match = fileRegex.exec(new Error().stack.substr(__filename.length + 37));
             name = _.trimRight(match[0], ':');
         }
@@ -48,3 +51,5 @@ class Main {
 }
 
 module.exports = new Main();
+module.exports.Level = Level;
+module.exports.MDC = MDC;

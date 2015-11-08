@@ -2,8 +2,8 @@
 
 var expect = require('chai').expect;
 
-var loggaah = require("../");
-var Level = require("../lib/Level.class");
+var loggaah = require("..");
+var Level = require("..").Level;
 
 describe("loggaah", () => {
     describe("instance", () => {
@@ -26,9 +26,8 @@ describe("loggaah", () => {
             expect(testLog.enabled(Level.debug)).to.be.false;
             expect(testLog.enabled(Level.trace)).to.be.false;
 
-            expect(testLog.getName).to.be.a.function;
-            expect(testLog.getConfig).to.be.a.function;
-            expect(testLog.setConfig).to.be.a.function;
+            expect(testLog.name).to.be.a.function;
+            expect(testLog.config).to.be.a.function;
         });
 
         it("should return the same logger instance every time", () => {

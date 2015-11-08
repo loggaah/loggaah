@@ -2,7 +2,7 @@
 
 var expect = require('chai').expect;
 
-var Level = require('../lib/Level.class');
+var Level = require('..').Level;
 
 describe("Level.class", () => {
     it("should have the same level for different names", () => {
