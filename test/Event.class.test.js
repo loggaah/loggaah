@@ -15,5 +15,6 @@ describe("Message", () => {
         expect(event.message).to.be.equal("test");
         expect(event.mdc).to.be.deep.equal(mdc);
         expect(event.error).to.be.deep.equal(error);
+        expect(event.time).to.be.lte(Date.now());
     });
 });

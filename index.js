@@ -22,7 +22,9 @@ class Main {
             name = param2;
         }
         if (!name || _.trim(name) == '') {
-            // TODO this shoud include a relative path to the root of the project (try to compare process.args to this path)
+            // TODO this shoud include a relative path to the root of the project
+            // (try to compare process.args to this path)
+            // (try to find package.json)
             var match = fileRegex.exec(new Error().stack.substr(__filename.length + 37));
             name = _.trimRight(match[0], ':');
         }
