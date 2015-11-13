@@ -47,7 +47,7 @@ describe("loggaah", () => {
         });
     });
 
-    describe("level", () => {
+    describe("#level()", () => {
         it("should get the default logger with a configuration parameter", () => {
             var testLog = loggaah.getLogger({
                 level: 'debug'
@@ -109,7 +109,7 @@ describe("loggaah", () => {
         });
     });
 
-    describe("log", () => {
+    describe("#log()", () => {
         it('should log multiple levels', () => {
             function checkEvents(events, level, message) {
                 expect(events.length).to.be.equal(1);
@@ -163,6 +163,14 @@ describe("loggaah", () => {
             checkEvents(testLog.captured, Level.trace, "15");
             testLog.TRACE(16);
             checkEvents(testLog.captured, Level.trace, "16");
+        });
+
+        it("should format correctly", () => {
+            var testLog = loggaah.getLogger();
+            testLog.capture = true;
+            testLog.log("%s test rendering json: %j", "first", { test: "value" });
+            expect(testLog.captured[0].message).to.be.equal('first test rendering json: {"test":"value"}');
+            expect(testLog.capture).to.be.true;
         });
     });
 });

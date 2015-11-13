@@ -2,9 +2,12 @@
 
 var _ = require('lodash');
 
-var Logger = require('./lib/Logger.class');
+var Appenders = require('./lib/Appenders.class');
+var Configurations = require('./lib/Configurations.class');
 var Level = require('./lib/Level.class');
+var Logger = require('./lib/Logger.class');
 var MDC = require('./lib/MDC.class');
+var Processors = require('./lib/Processors.class');
 
 var fileRegex = /[\w\.]+:/;
 
@@ -42,6 +45,9 @@ class Main {
         if (config) {
             this._loggers[name].config = config;
         }
+        // TODO Check for patterns in appenders that match this logger and apply
+        // TODO Check for patterns in levels that match this logger and apply
+        // TODO combine these two lookups into one
         return this._loggers[name];
     }
 
@@ -50,8 +56,25 @@ class Main {
             this._loggers[name].config = config;
         }
     }
+
+    setAppender(pattern, appender) {
+        // Maybe this should go into appenders
+        // TODO store pattern
+        // TODO apply to all existing loggers that match pattern
+    }
+
+    getAppender(appender) {
+
+    }
+
+    setLevel(pattern, level) {
+        // TODO apply level to all loggers that match the pattern
+    }
 }
 
 module.exports = new Main();
+module.exports.Appenders = Appenders;
+module.exports.Configurations = Configurations;
 module.exports.Level = Level;
 module.exports.MDC = MDC;
+module.exports.Processors = Processors;

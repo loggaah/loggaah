@@ -1,4 +1,20 @@
 {
+  "extensions": {
+    "processors": [ "path/to/processor.js", "processor-module-name" ],
+    "appenders": [ "path/to/appender.js", "appender-module-name" ],
+    "configurators": [ "path/to.configurator.js", "configurator-module-name" ]
+  },
+  "configurators": {
+    "JsonConfigurator": {
+      "rescan": 30
+    },
+    "RestConfigurator": {
+      "port": 8080,
+      "bind": "0.0.0.0",
+      "password": "notverysafe",
+      "ssl": false
+    }
+  },
   "processors": {
       "formatter": {
         "format": "%m%n"
