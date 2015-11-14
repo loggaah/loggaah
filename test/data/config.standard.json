@@ -23,12 +23,12 @@
   "appenders": {
     "STDOUT": {
       "type": "console",
-      "processor": "formatter",
+      "processors": "formatter",
       "color": false
     },
     "appLog": {
       "type": "file",
-      "processor": [ "formatter" ],
+      "processors": [ "formatter" ],
       "rollover": {
         "size": "100MB",
         "pattern": "yyyy-MM-dd"
@@ -39,11 +39,11 @@
     "testLogger": {
       "level": "DEBUG",
       "match": "lib/.*",
-      "appender": [ "STDOUT" ]
+      "appenders": [ "STDOUT" ]
     }
   },
   "root": {
     "level": "info",
-    "appender": "STDOUT"
+    "appenders": "STDOUT"
   }
 }

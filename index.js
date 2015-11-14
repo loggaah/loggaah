@@ -16,6 +16,14 @@ class Main {
         this._loggers = {};
     }
 
+    set debug(enabled) {
+        Configurations.configuration.debug = enabled;
+    }
+
+    get debug() {
+        return Configurations.configuration.debug;
+    }
+
     getLogger(param1, param2) {
         var name;
         if (_.isString(param1)) {
@@ -57,18 +65,43 @@ class Main {
         }
     }
 
-    setAppender(pattern, appender) {
-        // Maybe this should go into appenders
-        // TODO store pattern
+    setLevel(pattern, level) {
+        // TODO apply level to all loggers that match the pattern
+    }
+
+    setAppender(pattern, appender, config) {
+        // TODO this should go into appenders
+        // TODO check if appender exists. If not add this one to types of appenders (if is instance)
+        // TODO run configuration against appender (assign processors)
+        // TODO store appender under pattern
         // TODO apply to all existing loggers that match pattern
     }
 
-    getAppender(appender) {
+    getAppender(patternOrAppender) {
+        // TODO check if is instance of appender
+        // TODO check if pattern matches the name of an existing appender
+        // TODO check if name is pattern
+    }
+
+    setProcessor(name, processor, config) {
+        // TODO check if processor exists. If not add this one to types of processors (if is instance)
+        // TODO store processor under name
+    }
+
+    getProcessor(nameOrProcessor) {
 
     }
 
-    setLevel(pattern, level) {
-        // TODO apply level to all loggers that match the pattern
+    setConfigurator(configurator, config) {
+        Configurations.setConfigurator(configurator, config);
+    }
+
+    getConfigurator(configurator) {
+        Configurations.getConfigurator(configurator);
+    }
+
+    get configuration() {
+        return Configurations.configuration;
     }
 }
 

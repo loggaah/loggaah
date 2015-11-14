@@ -8,9 +8,7 @@ var JsonConfigurator = require('../lib/configurators/JsonConfigurator.class');
 
 describe('Configurations.class', function() {
     it("Should check if any Configurators are registered", function() {
-        var configurationList = Configurations.list();
-        expect(configurationList.length).to.be.equal(2);
-        expect(configurationList[0]).to.be.equal(DefaultConfigurator);
-        expect(configurationList[1]).to.be.equal(JsonConfigurator);
+        expect(Configurations.getConfigurator('default')).to.be.deep.equal(DefaultConfigurator);
+        expect(Configurations.getConfigurator('json')).to.be.deep.equal(JsonConfigurator);
     });
 });

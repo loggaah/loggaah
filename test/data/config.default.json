@@ -1,0 +1,33 @@
+{
+  "appenders": {
+    "console": {
+      "color": true,
+      "processor": "format",
+      "type": "console"
+    }
+  },
+  "configurators": {
+    "json": {
+      "files": [
+        "loggaah-test.json",
+        "logger-test.json",
+        "logging-test.json",
+        "loggaah.json",
+        "logger.json",
+        "logging.json"
+      ],
+      "rescan": 0
+    }
+  },
+  "debug": true,
+  "processors": {
+    "format": {
+      "format": "[%d] %m%n",
+      "type": "Formatter"
+    }
+  },
+  "root": {
+    "appenders": "console",
+    "level": "info"
+  }
+}

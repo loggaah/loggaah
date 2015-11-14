@@ -7,8 +7,10 @@ var Level = require('../').Level;
 var MDC = require('../').MDC;
 var Event = require('../lib/Event.class');
 
+loggaah.debug = true;
+
 describe("loggaah", () => {
-    describe("instance", () => {
+    describe("#instance()", () => {
         it("should return a default logger instance", () => {
             var testLog = loggaah.getLogger("test");
 
@@ -171,6 +173,25 @@ describe("loggaah", () => {
             testLog.log("%s test rendering json: %j", "first", { test: "value" });
             expect(testLog.captured[0].message).to.be.equal('first test rendering json: {"test":"value"}');
             expect(testLog.capture).to.be.true;
+        });
+    });
+
+    describe("#configuration()", () => {
+        it("should initially have the default configuration", () => {
+            expect(loggaah.configuration).to.be.deep.equal(require('./data/config.default.json'));
+        });
+
+        it("should set the json configuration location and reload", () => {
+            loggaah.setConfigurator("json", {files: ['data/config.standard.json']});
+            expect(loggaah.configuration).to.be.deep.equal(require('./data/config.standard.json'))
+        });
+
+        it("should override an existing configuration", () => {
+            loggaah.setAppender("my.test.js", "ConsoleAppender", {
+                color: true
+            });
+            expect(loggaah.configuration.appenders['my.test.js'].type).to.be.equal('console');
+            expect(loggaah.configuration.appenders['my.test.js'].color).to.be.true;
         });
     });
 });
