@@ -5,10 +5,10 @@
     "configurators": [ "path/to.configurator.js", "configurator-module-name" ]
   },
   "configurators": {
-    "JsonConfigurator": {
+    "json": {
       "rescan": 30
     },
-    "RestConfigurator": {
+    "rest": {
       "port": 8080,
       "bind": "0.0.0.0",
       "password": "notverysafe",

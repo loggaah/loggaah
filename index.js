@@ -3,7 +3,7 @@
 var _ = require('lodash');
 
 var Appenders = require('./lib/Appenders.class');
-var Configurations = require('./lib/Configurations.class');
+var Configuration = require('./lib/Configuration.class');
 var Level = require('./lib/Level.class');
 var Logger = require('./lib/Logger.class');
 var MDC = require('./lib/MDC.class');
@@ -17,11 +17,11 @@ class Main {
     }
 
     set debug(enabled) {
-        Configurations.configuration.debug = enabled;
+        Configuration.debug = enabled;
     }
 
     get debug() {
-        return Configurations.configuration.debug;
+        return Configuration.debug;
     }
 
     getLogger(param1, param2) {
@@ -93,21 +93,35 @@ class Main {
     }
 
     setConfigurator(configurator, config) {
-        Configurations.setConfigurator(configurator, config);
+
     }
 
     getConfigurator(configurator) {
-        Configurations.getConfigurator(configurator);
+
     }
 
     get configuration() {
-        return Configurations.configuration;
+        return Configuration;
+    }
+
+    set configuration(config) {
+        for (let property in config) {
+            Configuration[property] = config[property];
+        }
     }
 }
 
 module.exports = new Main();
 module.exports.Appenders = Appenders;
-module.exports.Configurations = Configurations;
+module.exports.Configurations = Configuration;
 module.exports.Level = Level;
 module.exports.MDC = MDC;
 module.exports.Processors = Processors;
+
+// Plugins
+require('./lib/configurators/DefaultConfigurator.class');
+require('./lib/configurators/JsonConfigurator.class');
+require('./lib/appenders/ConsoleAppender.class');
+require('./lib/appenders/FileAppender.class');
+require('./lib/processors/Formatter.class');
+require('./lib/processors/Batcher.class');

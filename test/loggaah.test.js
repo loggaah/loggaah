@@ -177,21 +177,28 @@ describe("loggaah", () => {
     });
 
     describe("#configuration()", () => {
-        it("should initially have the default configuration", () => {
-            expect(loggaah.configuration).to.be.deep.equal(require('./data/config.default.json'));
-        });
+        var ConsoleAppender =  require('../lib/appenders/ConsoleAppender.class');
 
-        it("should set the json configuration location and reload", () => {
-            loggaah.setConfigurator("json", {files: ['data/config.standard.json']});
-            expect(loggaah.configuration).to.be.deep.equal(require('./data/config.standard.json'))
+        it("should initially have the default configuration", () => {
+            expect(loggaah.configuration.configurators.default).to.be.ok;
+            expect(loggaah.configuration.configurators.json).to.be.ok;
+            expect(loggaah.configuration.appenders.console).to.be.ok;
         });
 
         it("should override an existing configuration", () => {
-            loggaah.setAppender("my.test.js", "ConsoleAppender", {
+            loggaah.configuration.appenders["anotherConsole"] = {
+                type: 'console',
                 color: true
-            });
-            expect(loggaah.configuration.appenders['my.test.js'].type).to.be.equal('console');
-            expect(loggaah.configuration.appenders['my.test.js'].color).to.be.true;
+            };
+            expect(loggaah.configuration.appenders['anotherConsole'].type).to.be.equal('console');
+            expect(loggaah.configuration.appenders['anotherConsole'].color).to.be.true;
+        });
+
+        it("should set the json configuration location and reload", () => {
+            loggaah.configuration.configurators.json =  {
+                files: ['data/config.standard.json']
+            };
+            expect(loggaah.configuration.configurators.json.rescan).to.be.deep.equal(30)
         });
     });
 });
