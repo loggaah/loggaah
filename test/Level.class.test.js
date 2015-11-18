@@ -24,6 +24,12 @@ describe("Level.class", () => {
 
         expect(Level.TRACE).to.be.equal(Level.trace);
         expect(Level.TRACE == 1).to.be.true;
+
+        expect(Level.ALL).to.be.equal(Level.all);
+        expect(Level.ALL == 0).to.be.true;
+
+        expect(Level.OFF).to.be.equal(Level.off);
+        expect(Level.OFF == 6).to.be.true;
     });
 
     it("should get the right log level for a string", () => {
