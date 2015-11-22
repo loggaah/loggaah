@@ -201,4 +201,10 @@ describe("loggaah", () => {
             expect(loggaah.configuration.configurators.json.rescan).to.be.deep.equal(30)
         });
     });
+
+    describe("#appender()", () => {
+        it("should test if overwriting an existing appender with a new type changes the type configured", () => {
+
+        });
+    });
 });

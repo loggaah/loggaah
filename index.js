@@ -48,6 +48,7 @@ class Main {
             config = param2;
         }
         if (!this._loggers[name]) {
+            // TODO this needs to go into Loggers.class
             this._loggers[name] = new Logger(name);
         }
         if (config) {
