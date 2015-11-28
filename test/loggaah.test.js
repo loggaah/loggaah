@@ -3,8 +3,8 @@
 var expect = require('chai').expect;
 
 var loggaah = require('../');
-var Level = require('../').Level;
-var MDC = require('../').MDC;
+var Level = loggaah.Level;
+var MDC = loggaah.MDC;
 var Event = require('../lib/Event.class');
 
 loggaah.debug = true;
@@ -174,6 +174,36 @@ describe("loggaah", () => {
             expect(testLog.captured[0].message).to.be.equal('first test rendering json: {"test":"value"}');
             expect(testLog.capture).to.be.true;
         });
+
+        it("should append a log to the memory appender", () => {
+            var testLog = loggaah.getLogger("appender.memory");
+            loggaah.configuration.appenders.add('mem', { type: 'memory' });
+            testLog.addAppender("mem");
+            testLog.level = Level.INFO;
+            testLog.info("This is a test");
+            var events = loggaah.getAppender("mem").messages;
+            expect(events.length).to.be.equal(1);
+            expect(events[0].message).to.be.equal("This is a test");
+            expect(loggaah.getAppender("mem").messages.length).to.be.equal(0);
+        });
+
+        it("should append a log to the memory appender after being processed", () => {
+            var testLog = loggaah.getLogger("appender.memory.processed");
+            loggaah.configuration.appenders.add('mem', {type: 'memory'});
+            testLog.addAppender('mem');
+            loggaah.configuration.processors.add('proc', {
+                type: 'formatter',
+                pattern: "--%m"
+            });
+            loggaah.configuration.appenders.mem = {
+                processors: 'proc'
+            };
+            testLog.level = Level.INFO;
+            testLog.info("This is a test");
+            var messages = loggaah.getAppender("mem").messages;
+            expect(messages.length).to.be.equal(1);
+            expect(messages[0]).to.be.equal("--This is a test");
+        });
     });
 
     describe("#configuration()", () => {
@@ -204,7 +234,15 @@ describe("loggaah", () => {
 
     describe("#appender()", () => {
         it("should test if overwriting an existing appender with a new type changes the type configured", () => {
+            var testLog = loggaah.getLogger("appender.changed");
 
+            loggaah.configuration.appenders.add('change', { type: 'console' });
+            testLog.addAppender('change');
+            loggaah.configuration.appenders.change = { type: 'memory' };
+
+            expect(testLog.hasAppender('change').type).to.be.equal('memory');
+            testLog.removeAppender('change');
+            expect(testLog.appenders.length).to.be.equal(0);
         });
     });
 });

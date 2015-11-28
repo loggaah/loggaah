@@ -23,7 +23,7 @@
   "processors": {
     "format": {
       "format": "[%d] %m%n",
-      "type": "Formatter"
+      "type": "formatter"
     }
   },
   "root": {

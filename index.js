@@ -4,9 +4,7 @@ var _ = require('lodash');
 
 var Appenders = require('./lib/Appenders.class');
 var Configuration = require('./lib/Configuration.class');
-var Level = require('./lib/Level.class');
-var Logger = require('./lib/Logger.class');
-var MDC = require('./lib/MDC.class');
+var Loggers = require('./lib/Loggers.class');
 var Processors = require('./lib/Processors.class');
 
 var fileRegex = /[\w\.]+:/;
@@ -48,22 +46,17 @@ class Main {
             config = param2;
         }
         if (!this._loggers[name]) {
-            // TODO this needs to go into Loggers.class
-            this._loggers[name] = new Logger(name);
+            return Loggers.__create(name, config);
         }
-        if (config) {
-            this._loggers[name].config = config;
-        }
-        // TODO Check for patterns in appenders that match this logger and apply
-        // TODO Check for patterns in levels that match this logger and apply
-        // TODO combine these two lookups into one
-        return this._loggers[name];
+        return Loggers.__get(name);
     }
 
     setLogger(name, config) {
-        if (this._loggers[name]) {
-            this._loggers[name].config = config;
+        var logger = Loggers.__get(name);
+        if (!logger) {
+            logger = this.getLogger(name, config);
         }
+        logger.config = config;
     }
 
     setLevel(pattern, level) {
@@ -78,7 +71,8 @@ class Main {
         // TODO apply to all existing loggers that match pattern
     }
 
-    getAppender(patternOrAppender) {
+    getAppender(name) {
+        return Appenders.__parse(name);
         // TODO check if is instance of appender
         // TODO check if pattern matches the name of an existing appender
         // TODO check if name is pattern
@@ -114,9 +108,9 @@ class Main {
 
 module.exports = new Main();
 module.exports.Appenders = Appenders;
-module.exports.Configurations = Configuration;
-module.exports.Level = Level;
-module.exports.MDC = MDC;
+module.exports.Configurators = require('./lib/Configurators.class');
+module.exports.Level = require('./lib/Level.class');
+module.exports.MDC = require('./lib/MDC.class');
 module.exports.Processors = Processors;
 
 // Plugins
@@ -124,5 +118,6 @@ require('./lib/configurators/DefaultConfigurator.class');
 require('./lib/configurators/JsonConfigurator.class');
 require('./lib/appenders/ConsoleAppender.class');
 require('./lib/appenders/FileAppender.class');
+require('./lib/appenders/MemoryAppender.class');
 require('./lib/processors/Formatter.class');
 require('./lib/processors/Batcher.class');
