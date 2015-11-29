@@ -1,8 +1,8 @@
 # Loggaah!!! An intuitive logging framework for Node.js
 [![npm version](https://badge.fury.io/js/loggaah.svg)](http://badge.fury.io/js/loggaah)
-[![Build Status](https://travis-ci.org/loggaah/loggaah.svg?branch=master)](https://travis-ci.org/mallocator/loggaah)
-[![Coverage Status](https://coveralls.io/repos/loggaah/loggaah/badge.svg?branch=master&service=github)](https://coveralls.io/github/mallocator/loggaah?branch=master)
-[![Dependency Status](https://david-dm.org/loggaah/loggaah.svg)](https://david-dm.org/mallocator/loggaah) 
+[![Build Status](https://travis-ci.org/loggaah/loggaah.svg?branch=master)](https://travis-ci.org/loggaah/loggaah)
+[![Coverage Status](https://coveralls.io/repos/loggaah/loggaah/badge.svg?branch=master&service=github)](https://coveralls.io/github/loggaah/loggaah?branch=master)
+[![Dependency Status](https://david-dm.org/loggaah/loggaah.svg)](https://david-dm.org/loggaah/loggaah) 
 
 Yes this is another logging framework, because the world can never have enough logging frameworks.
 
@@ -101,8 +101,7 @@ Run the following command in the directory where you want the tools installed
 	npm install loggaah --save
 
 Notice that if you don't install released versions from npm and use the master instead, that it is in active development 
-and might not be working. For help and questions you can always 
-[file an issue](https://github.com/mallocator/Elasticsearch-Exporter/issues).
+and might not be working. For help and questions you can always [file an issue](https://github.com/loggaah/loggaah/issues).
 
 
 ## Configurators
