@@ -2,13 +2,13 @@
   "name": "loggaah",
   "version": "0.1.0",
   "description": "A logging framework for Node.js",
-  "homepage": "https://github.com/mallocator/loggaah",
+  "homepage": "https://github.com/loggaah/loggaah",
   "license": "Apache-2.0",
   "author": "Ravi Gairola <mallox@pyxzl.net>",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mallocator/loggaah.git"
+    "url": "git+https://github.com/loggaah/loggaah.git"
   },
   "os": [
     "darwin",
@@ -16,10 +16,15 @@
   ],
   "keywords": [
     "logging",
-    "logger"
+    "logger",
+    "log",
+    "framework",
+    "library",
+    "tools",
+    "log4j"
   ],
   "bugs": {
-    "url": "https://github.com/mallocator/loggaah/issues",
+    "url": "https://github.com/loggaah/loggaah/issues",
     "email": "mallox@pyxzl.net"
   },
   "devDependencies": {
