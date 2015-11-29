@@ -230,6 +230,14 @@ describe("loggaah", () => {
             };
             expect(loggaah.configuration.configurators.json.rescan).to.be.deep.equal(30)
         });
+
+        it("should test if we can get and set configurators through the main entry point", () => {
+            var jsonConfigurator = loggaah.getConfigurator('json');
+            expect(jsonConfigurator.type).to.be.equal('json');
+            expect(jsonConfigurator._rescan).to.be.equal(30);
+            loggaah.setConfigurator('json', { rescan: 0 });
+            expect(jsonConfigurator._rescan).to.be.equal(0);
+        });
     });
 
     describe("#appender()", () => {
@@ -243,6 +251,20 @@ describe("loggaah", () => {
             expect(testLog.hasAppender('change').type).to.be.equal('memory');
             testLog.removeAppender('change');
             expect(testLog.appenders.length).to.be.equal(0);
+        });
+
+        it("should test if we can get and set appenders through the main the main entry point", () => {
+            loggaah.setAppender('newAppender', { type: 'memory' });
+            var appender = loggaah.getAppender('newAppender');
+            expect(appender.type).to.be.equal('memory');
+        });
+    });
+
+    describe("#processor()", () => {
+        it("should test if we can get and set processors through the main the main entry point", () => {
+            loggaah.setProcessor('newProcessor', { type: 'formatter' });
+            var processor = loggaah.getProcessor('newProcessor');
+            expect(processor.type).to.be.equal('formatter');
         });
     });
 });

@@ -4,6 +4,7 @@ var _ = require('lodash');
 
 var Appenders = require('./lib/Appenders.class');
 var Configuration = require('./lib/Configuration.class');
+var Configurators = require('./lib/Configurators.class');
 var Loggers = require('./lib/Loggers.class');
 var Processors = require('./lib/Processors.class');
 
@@ -52,6 +53,8 @@ class Main {
     }
 
     setLogger(name, config) {
+        // TODO deal with regex name
+        // TODO this needs to go into Loggers
         var logger = Loggers.__get(name);
         if (!logger) {
             logger = this.getLogger(name, config);
@@ -60,39 +63,41 @@ class Main {
     }
 
     setLevel(pattern, level) {
-        // TODO apply level to all loggers that match the pattern
+        // TODO add regex rule to Loggers.class
     }
 
-    setAppender(pattern, appender, config) {
-        // TODO this should go into appenders
-        // TODO check if appender exists. If not add this one to types of appenders (if is instance)
-        // TODO run configuration against appender (assign processors)
-        // TODO store appender under pattern
-        // TODO apply to all existing loggers that match pattern
+    setAppender(appender, config) {
+        if (!this.configuration.appenders[appender]) {
+            this.configuration.appenders.add(appender, config);
+        }
+        this.configuration.appenders[appender] = config;
     }
 
-    getAppender(name) {
-        return Appenders.__parse(name);
-        // TODO check if is instance of appender
-        // TODO check if pattern matches the name of an existing appender
-        // TODO check if name is pattern
+    getAppender(appender) {
+        return Appenders.__parse(appender);
     }
 
-    setProcessor(name, processor, config) {
-        // TODO check if processor exists. If not add this one to types of processors (if is instance)
-        // TODO store processor under name
+    setProcessor(processor, config) {
+        if (!this.configuration.processors[processor]) {
+            this.configuration.processors.add(processor, config);
+        }
+        this.configuration.processors[processor] = config;
     }
 
-    getProcessor(nameOrProcessor) {
-
+    getProcessor(processor) {
+        return Processors.__parse(processor);
     }
 
     setConfigurator(configurator, config) {
-
+        if (this.configuration.configurators[configurator]) {
+            this.configuration.configurators[configurator] = config;
+        } else {
+            throw new Error('Trying to set configuration for non existent Configurator: ' + configurator);
+        }
     }
 
     getConfigurator(configurator) {
-
+        return Configurators.__parse(configurator);
     }
 
     get configuration() {
@@ -108,7 +113,7 @@ class Main {
 
 module.exports = new Main();
 module.exports.Appenders = Appenders;
-module.exports.Configurators = require('./lib/Configurators.class');
+module.exports.Configurators = Configurators;
 module.exports.Level = require('./lib/Level.class');
 module.exports.MDC = require('./lib/MDC.class');
 module.exports.Processors = Processors;
