@@ -6,7 +6,7 @@
 
 Yes this is another logging framework, because the world can never have enough logging frameworks.
 
-#### So what makes this one so special or even different from others? Let's see:
+#### What makes this one so special or even different from others? Let's see:
 
 * Written in ECMA 6
 * Extensible plugin architecture
@@ -16,7 +16,7 @@ Yes this is another logging framework, because the world can never have enough l
 * Configurable log levels
 * Follows examples and idea of Log4j2/Logback in Java
 
-#### So how do you use it? Easy:
+#### How do you use it? Easy:
 
 ```JavaScript
 var logs = require('loggaah');
@@ -94,7 +94,18 @@ logs.configurations.processors.formatter = {
 };
 ```
 
-# Configurators
+
+## Installation
+Run the following command in the directory where you want the tools installed
+
+	npm install loggaah --save
+
+Notice that if you don't install released versions from npm and use the master instead, that it is in active development 
+and might not be working. For help and questions you can always 
+[file an issue](https://github.com/mallocator/Elasticsearch-Exporter/issues).
+
+
+## Configurators
 Configurators are plugins that update a configuration. All configurators are enabled at the same time, and processed
 in order of initialization. Be warned that if you activate features such as rescanning files, configurators with higher
 priority might be overridden.
@@ -116,8 +127,9 @@ Listens on a specified port for REST commands and lets you change the logging co
 A web site that allows you to configure the client from the comforts of your own browser
 
 
-# Loggers
+## Loggers
 Loggers combine multiple functions in them:
+
 1. Loggers are your entry point into the logging system where you generate events (by calling log.info() for example)
 2. Loggers can filter messages based on logging level
 3. Loggers configure to which appender a message gets routed
@@ -137,7 +149,7 @@ companions. If you want to define your own levels you're free to do so, just mak
 for off and all as these have special meaning.
 
 
-# Appenders
+## Appenders
 Appenders decide where to output a message to once it has been filtered and processed. A type of appender can be 
 assigned multiple times, which is why appenders have names.
 
@@ -153,7 +165,7 @@ Maybe this one is only there for debugging, or maybe you have some use for it. S
 memory before discarding them. 
  
 
-# Processors
+## Processors
 Processors are there to manipulate the contents of messages. Similar to appenders a processor can have multiple 
 instances which is why they are also named. Processors can be assigned to Appenders to process messages before they
 are passed on to the appender.
@@ -168,3 +180,26 @@ _TODO_: Formatting Guide
 This processor will batch together messages up to a certain size or time limit, after which it will pass everything on
 to the next processor or appender in chain. This can be used for high performance systems to reduce overhead of writing
 operations.
+
+
+## Plugins
+Official plugins can be found on github under the organization [loggaah](https://github.com/loggaah). If you wish to 
+have your plugin be linked here, just shoot me a quick email at mallox@pyxzl.net
+
+## Tests
+
+You can just run ```npm test``` to see an output of all existing tests as well as coverage information.
+
+## Bugs and Feature Requests
+
+I try to find all the bugs and have tests to cover all cases, but since I'm working on this project alone, it's easy to 
+miss something. Also I'm trying to think of new features to implement, but most of the time I add new features because 
+someone asked me for it. So please report any bugs or feature request to mallox@pyxzl.net or file an issue directly on 
+[Github](https://github.com/loggaah/loggaah/issues). Before submitting a bug report specific to your
+ problem, try running the same command and verbose mode `-v` so that I have some additional information to work with.
+Thanks!
+
+## Donations
+
+Wow, apparently there are people who want to support me. If you're one of them you can do so via bitcoin over here: 
+[mallox@coinbase](https://www.coinbase.com/Mallox)
