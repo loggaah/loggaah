@@ -39,8 +39,8 @@ class Main {
      * interchangeable. If no name is given a name will be automatically determined depending on the file location
      * from which the logger was called. If no configuration is given, the default or previously defined configuration
      * is in effect.
-     * @param {String} param1           Logger name to set
-     * @param {Object|Configuration} param2    Logger configuration to use
+     * @param {string} [param1='<filename>']   Logger name to set
+     * @param {Object|Configuration} [param2]  Logger configuration to use
      * @returns {Logger}
      */
     getLogger(param1, param2) {
@@ -74,8 +74,8 @@ class Main {
 
     /**
      * Set the configuration for a logger.
-     * @param {String|Regex} name      The name or regular expression of the logger to configure
-     * @param {Object|Configuration} config    The configuration to set for this/these loggers
+     * @param {string|RegExp} name              The name or regular expression of the logger to configure
+     * @param {Object|Configuration} config     The configuration to set for this/these loggers
      */
     setLogger(name, config) {
         // TODO deal with regex name
@@ -89,51 +89,89 @@ class Main {
 
     /**
      * Shorthandmethod for setting the level configuration for a logger.
-     * @param pattern
-     * @param level
+     * @param {string|RegExp} pattern
+     * @param {Level} level
      */
     setLevel(pattern, level) {
         // TODO add regex rule to Loggers.class
     }
 
-    setAppender(appender, config) {
-        if (!this.configuration.appenders[appender]) {
-            this.configuration.appenders.add(appender, config);
+    /**
+     *
+     * @param {string} name
+     * @param {Object|Configuration} config
+     */
+    setAppender(name, config) {
+        if (!this.configuration.appenders[name]) {
+            this.configuration.appenders.add(name, config);
         }
-        this.configuration.appenders[appender] = config;
+        this.configuration.appenders[name] = config;
     }
 
-    getAppender(appender) {
-        return Appenders.__parse(appender);
+    /**
+     *
+     * @param name
+     * @returns {Appender}
+     */
+    getAppender(name) {
+        return Appenders.__parse(name);
     }
 
-    setProcessor(processor, config) {
-        if (!this.configuration.processors[processor]) {
-            this.configuration.processors.add(processor, config);
+    /**
+     *
+     * @param {string} name
+     * @param {Object|Configuration} config
+     */
+    setProcessor(name, config) {
+        if (!this.configuration.processors[name]) {
+            this.configuration.processors.add(name, config);
         }
-        this.configuration.processors[processor] = config;
+        this.configuration.processors[name] = config;
     }
 
-    getProcessor(processor) {
-        return Processors.__parse(processor);
+    /**
+     *
+     * @param name
+     * @returns {Processor}
+     */
+    getProcessor(name) {
+        return Processors.__parse(name);
     }
 
-    setConfigurator(configurator, config) {
-        if (this.configuration.configurators[configurator]) {
-            this.configuration.configurators[configurator] = config;
+    /**
+     *
+     * @param {string} name
+     * @param {Object|Configuration} config
+     */
+    setConfigurator(name, config) {
+        if (this.configuration.configurators[name]) {
+            this.configuration.configurators[name] = config;
         } else {
-            throw new Error('Trying to set configuration for non existent Configurator: ' + configurator);
+            throw new Error('Trying to set configuration for non existent Configurator: ' + name);
         }
     }
 
-    getConfigurator(configurator) {
-        return Configurators.__parse(configurator);
+    /**
+     *
+     * @param {string} name
+     * @returns {Configurator}
+     */
+    getConfigurator(name) {
+        return Configurators.__parse(name);
     }
 
+    /**
+     *
+     * @returns {Object|Configuration}
+     */
     get configuration() {
         return Configuration;
     }
 
+    /**
+     *
+     * @param {Object|Configuration} config
+     */
     set configuration(config) {
         for (let property in config) {
             Configuration[property] = config[property];
