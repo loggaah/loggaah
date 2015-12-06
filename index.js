@@ -10,19 +10,39 @@ var Processors = require('./lib/Processors.class');
 
 var fileRegex = /[\w\.]+:/;
 
+/**
+ * Entry point for external systems that want to use this library.
+ */
 class Main {
     constructor() {
         this._loggers = {};
     }
 
+    /**
+     * Enable debug logs printed to the console.
+     * @param {boolean} enabled
+     */
     set debug(enabled) {
         Configuration.debug = enabled;
     }
 
+    /**
+     * Returns true if debug logs are printed to the console.
+     * @returns {boolean}
+     */
     get debug() {
         return Configuration.debug;
     }
 
+    /**
+     * Returns a logger instance that is used to log messages. Both parameters are optional and the order is
+     * interchangeable. If no name is given a name will be automatically determined depending on the file location
+     * from which the logger was called. If no configuration is given, the default or previously defined configuration
+     * is in effect.
+     * @param {String} param1           Logger name to set
+     * @param {Object|Configuration} param2    Logger configuration to use
+     * @returns {Logger}
+     */
     getLogger(param1, param2) {
         var name;
         if (_.isString(param1)) {
@@ -52,6 +72,11 @@ class Main {
         return Loggers.__get(name);
     }
 
+    /**
+     * Set the configuration for a logger.
+     * @param {String|Regex} name      The name or regular expression of the logger to configure
+     * @param {Object|Configuration} config    The configuration to set for this/these loggers
+     */
     setLogger(name, config) {
         // TODO deal with regex name
         // TODO this needs to go into Loggers
@@ -62,6 +87,11 @@ class Main {
         logger.config = config;
     }
 
+    /**
+     * Shorthandmethod for setting the level configuration for a logger.
+     * @param pattern
+     * @param level
+     */
     setLevel(pattern, level) {
         // TODO add regex rule to Loggers.class
     }

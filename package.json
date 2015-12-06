@@ -28,11 +28,12 @@
     "email": "mallox@pyxzl.net"
   },
   "devDependencies": {
-    "chai": "^3.3.0",
+    "chai": "^3.4.1",
     "coveralls": "^2.11.4",
     "gently": "^0.10.0",
-    "istanbul": "^0.4.0",
-    "mocha": "^2.3.3",
+    "istanbul": "^0.4.1",
+    "jsdoc": "^3.4.0",
+    "mocha": "^2.3.4",
     "mocha-lcov-reporter": "^1.0.0"
   },
   "engine": {
@@ -40,7 +41,8 @@
   },
   "scripts": {
     "test": "istanbul cover _mocha",
-    "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec"
+    "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec",
+    "doc": "jsdoc -c doc/jsdoc.json"
   },
   "dependencies": {
     "lodash": "^3.10.1"

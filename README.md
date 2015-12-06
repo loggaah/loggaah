@@ -86,17 +86,17 @@ logs.configuration.configurators.json =  {
 
 Add a processor to an appender:
 ```JavaScript
-logs.configuration.appenders.default = {
-    processors: 'formatter',
-};
 logs.configurations.processors.formatter = {
     pattern: '[%d] %m%n'
+};
+logs.configuration.appenders.default = {
+    processors: 'formatter',
 };
 ```
 
 
 ## Installation
-Run the following command in the directory where you want the tools installed
+Run the following command in the root of the project that you want to use the loggaah with.
 
 	npm install loggaah --save
 
