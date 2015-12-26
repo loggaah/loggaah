@@ -40,8 +40,8 @@
     "node": ">=5.0"
   },
   "scripts": {
-    "test": "istanbul cover _mocha",
-    "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec",
+    "test": "istanbul cover _mocha -- --recursive",
+    "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec --recursive",
     "doc": "jsdoc -c doc/jsdoc.json"
   },
   "dependencies": {
