@@ -8,7 +8,7 @@ Yes this is another logging framework, because the world can never have enough l
 
 #### What makes this one so special or even different from others? Let's see:
 
-* Written in ECMA 6
+* Written in ECMA 6 (does not require --harmony flag)
 * Extensible plugin architecture
 * Simple configuration
 * Modifiable at runtime
@@ -123,7 +123,7 @@ Basically the same as the Json Configurator only this time in Yaml.
 Listens on a specified port for REST commands and lets you change the logging configuration from remote.
 
 ### Web Configurator (Plugin)
-A web site that allows you to configure the client from the comforts of your own browser
+A web interface that allows you to configure the client from the comforts of your own browser
 
 
 ## Loggers
@@ -162,6 +162,10 @@ size or time.
 ### Memory Appender
 Maybe this one is only there for debugging, or maybe you have some use for it. Stores a fixed number of messages in 
 memory before discarding them. 
+
+### REST Appender (plugin)
+An appender that will cache messages until they're are retrieved through a REST call. Behaves similar to the memory
+appender in that it will only store messages up to a specified number/time.
  
 
 ## Processors
@@ -179,6 +183,10 @@ _TODO_: Formatting Guide
 This processor will batch together messages up to a certain size or time limit, after which it will pass everything on
 to the next processor or appender in chain. This can be used for high performance systems to reduce overhead of writing
 operations.
+
+### Statistics (Plugin)
+This processor will generate statistics based on messages passing through, recording log levels, intervals, line 
+lengths, common words and probably much more. Stats can then be recovered by piping this processor to an appender
 
 
 ## Plugins

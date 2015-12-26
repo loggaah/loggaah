@@ -193,7 +193,7 @@ describe("loggaah", () => {
             testLog.addAppender('mem');
             loggaah.configuration.processors.add('proc', {
                 type: 'formatter',
-                pattern: "--%m"
+                pattern: "%p %m"
             });
             loggaah.configuration.appenders.mem = {
                 processors: 'proc'
@@ -202,7 +202,7 @@ describe("loggaah", () => {
             testLog.info("This is a test");
             var messages = loggaah.getAppender("mem").messages;
             expect(messages.length).to.be.equal(1);
-            expect(messages[0]).to.be.equal("--This is a test");
+            expect(messages[0]).to.be.equal("INFO This is a test");
         });
     });
 

@@ -34,7 +34,7 @@ describe('Logger', () => {
         });
 
         it('should get an appender assigned when changing configuration', () => {
-            var testLog = Loggers.__create('testLog');
+            var testLog = Loggers.__get('testLog');
             Configuration.appenders.add('mem1', { type: 'memory' });
             testLog.addAppender('mem1');
             expect(testLog.appenders.length).to.be.equal(1);

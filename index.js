@@ -14,9 +14,7 @@ var fileRegex = /[\w\.]+:/;
  * Entry point for external systems that want to use this library.
  */
 class Main {
-    constructor() {
-        this._loggers = {};
-    }
+    constructor() {}
 
     /**
      * Enable debug logs printed to the console.
@@ -66,10 +64,7 @@ class Main {
         if (_.isObject(param2)) {
             config = param2;
         }
-        if (!this._loggers[name]) {
-            return Loggers.__create(name, config);
-        }
-        return Loggers.__get(name);
+        return Loggers.__get(name, config);
     }
 
     /**
@@ -78,13 +73,7 @@ class Main {
      * @param {Object|Configuration} config     The configuration to set for this/these loggers
      */
     setLogger(name, config) {
-        // TODO deal with regex name
-        // TODO this needs to go into Loggers
-        var logger = Loggers.__get(name);
-        if (!logger) {
-            logger = this.getLogger(name, config);
-        }
-        logger.config = config;
+        Loggers.__configure(name, config);
     }
 
     /**
@@ -93,7 +82,9 @@ class Main {
      * @param {Level} level
      */
     setLevel(pattern, level) {
-        // TODO add regex rule to Loggers.class
+        Loggers.__configure(pattern, {
+            level: level
+        });
     }
 
     /**
