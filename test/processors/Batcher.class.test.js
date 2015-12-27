@@ -13,7 +13,7 @@ describe('Batcher', () => {
         };
 
         for (let i = 0; i <= 10 ; i++) {
-            batcher.process(new Event('test/source', Level.INFO, i), (events) => {
+            batcher.process([new Event('test/source', Level.INFO, i)], (events) => {
                 expect(events.length).to.equal(10);
                 expect(events[0].message).to.equal(0);
                 expect(events[1].message).to.equal(1);
@@ -29,7 +29,7 @@ describe('Batcher', () => {
         };
 
         for (let i = 0; i < 3; i++) {
-            batcher.process(new Event('test/source', Level.INFO, i), (events) => {
+            batcher.process([new Event('test/source', Level.INFO, i)], (events) => {
                 expect(events.length).to.equal(3);
                 done();
             });
@@ -45,7 +45,7 @@ describe('Batcher', () => {
 
         var calls = 0;
         for (let i = 0; i <= 10; i++) {
-            batcher.process(new Event('test/source', Level.INFO, i), (events) => {
+            batcher.process([new Event('test/source', Level.INFO, i)], (events) => {
                 calls++;
                 // Batch size reached call
                 if (calls == 1) {

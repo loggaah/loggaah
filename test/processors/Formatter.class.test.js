@@ -14,8 +14,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "This is a test");
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal("INF This is a test");
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal("INF This is a test");
             done();
         });
     });
@@ -27,8 +27,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "<test>");
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal("%3Ctest%3E");
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal("%3Ctest%3E");
             done();
         });
     });
@@ -42,8 +42,8 @@ describe("Formatter", () => {
         var mdc = new MDC();
         mdc.set('test', 123);
         var event = new Event("test/source", Level.INFO, "This is a test message", mdc);
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal("This is a test message test=123");
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal("This is a test message test=123");
             done();
         });
     });
@@ -58,8 +58,8 @@ describe("Formatter", () => {
         mdc.set('test1', 123);
         mdc.set('test2', 'foo');
         var event = new Event("test/source", Level.INFO, "This is a test message", mdc);
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal("This is a test message test1=123, test2=foo");
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal("This is a test message test1=123, test2=foo");
             done();
         });
     });
@@ -73,8 +73,8 @@ describe("Formatter", () => {
         var mdc = new MDC();
         mdc.set('test1', 123);
         var event = new Event("test/source", Level.INFO, "This is a test message", mdc);
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal(event.time.toISOString() + " [INFO] This is a test message test1=123");
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal(event.time.toISOString() + " [INFO] This is a test message test1=123");
             done();
         });
     });
@@ -86,8 +86,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "This is a test message", null, new Error('This is a test'));
-        formatter.process(event, (event) => {
-            expect(event.message).to.include("This is a test")
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.include("This is a test")
                 .and.to.include("at Context")
                 .and.to.include(__filename);
             done();
@@ -101,8 +101,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "This is a test message", null, new Error('This is a test'));
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal("This is a test");
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal("This is a test");
             done();
         });
     });
@@ -114,9 +114,9 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "This is a test message", null, new Error('This is a test'));
-        formatter.process(event, (event) => {
-            expect(event.message).to.include("This is a test");
-            expect(event.message.match('\n').length).to.equal(1);
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.include("This is a test");
+            expect(events[0].message.match('\n').length).to.equal(1);
             done();
         });
     });
@@ -128,8 +128,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "test");
-        formatter.process(event, (event) => {
-            expect(event.message).to.be.within(1, 100000);
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.be.within(1, 100000);
             done();
         });
     });
@@ -141,8 +141,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "test");
-        formatter.process(event, (event) => {
-            expect(/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(event.message)).to.be.true;
+        formatter.process([event], (events) => {
+            expect(/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(events[0].message)).to.be.true;
             done();
         });
     });
@@ -154,11 +154,11 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "test");
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal('1');
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal('1');
         });
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal('2');
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal('2');
             done();
         });
     });
@@ -170,8 +170,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "test");
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal('' + process.pid);
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal('' + process.pid);
             done();
         });
     });
@@ -183,8 +183,8 @@ describe("Formatter", () => {
         };
 
         var event = new Event("test/source", Level.INFO, "test");
-        formatter.process(event, (event) => {
-            expect(event.message).to.equal('%');
+        formatter.process([event], (events) => {
+            expect(events[0].message).to.equal('%');
             done();
         });
     });

@@ -181,10 +181,10 @@ describe("loggaah", () => {
             testLog.addAppender("mem");
             testLog.level = Level.INFO;
             testLog.info("This is a test");
-            var events = loggaah.getAppender("mem").messages;
+            var events = loggaah.getAppender("mem").events;
             expect(events.length).to.be.equal(1);
             expect(events[0].message).to.be.equal("This is a test");
-            expect(loggaah.getAppender("mem").messages.length).to.be.equal(0);
+            expect(loggaah.getAppender("mem").events.length).to.be.equal(0);
         });
 
         it("should append a log to the memory appender after being processed", () => {
@@ -200,9 +200,9 @@ describe("loggaah", () => {
             };
             testLog.level = Level.INFO;
             testLog.info("This is a test");
-            var messages = loggaah.getAppender("mem").messages;
-            expect(messages.length).to.be.equal(1);
-            expect(messages[0]).to.be.equal("INFO This is a test");
+            var events = loggaah.getAppender("mem").events;
+            expect(events.length).to.be.equal(1);
+            expect(events[0].message).to.be.equal("INFO This is a test");
         });
     });
 
