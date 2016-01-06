@@ -132,6 +132,7 @@ Loggers combine multiple functions in them:
 1. Loggers are your entry point into the logging system where you generate events (by calling log.info() for example)
 2. Loggers can filter messages based on logging level
 3. Loggers configure to which appender a message gets routed
+4. Loggers are configured using regular expressions. Any log the regex matches, will have its rule applied.
 
 All loggers have names, even if you don't set one the system will generate one for you (typically something based on the
 file path). When you set a configuration you can specify a name that will match any logger with the same prefix or you
