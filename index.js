@@ -2,8 +2,8 @@
 
 var _ = require('lodash');
 
-var Appenders = require('./lib/Appenders.class');
 var Configuration = require('./lib/Configuration.class');
+var Appenders = require('./lib/Appenders.class');
 var Configurators = require('./lib/Configurators.class');
 var Loggers = require('./lib/Loggers.class');
 var Processors = require('./lib/Processors.class');
