@@ -1,8 +1,8 @@
-"use strict";
+'use strict';
 
 var expect = require('chai').expect;
 
-var MDC = require('..').MDC;
+var MDC = require('../').MDC;
 
 describe("MDC", () => {
     it("should store properties", () => {

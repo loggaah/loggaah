@@ -1,46 +1,114 @@
-"use strict";
+'use strict';
+
+var path = require('path');
 
 var expect = require('chai').expect;
 
+var Level = require('../lib/Level.class');
 var Logger = require('../lib/Logger.class');
-var Loggers = require('../lib/Loggers.class');
-var Configuration = require('../').configuration;
+
 
 describe('Logger', () => {
     describe('#appenders', () => {
-        it('should not have any appenders starting out', () => {
-            var testLog = new Logger();
-            expect(testLog.appenders.length).to.be.equal(0);
-        });
-
         it('should be able to have multiple appenders assigned', () => {
-            var testLog = new Logger();
-            Configuration.appenders.add('mem1', { type: 'memory' });
-            Configuration.appenders.add('mem2', {type: 'memory'});
-            testLog.addAppender('mem1');
-            testLog.addAppender('mem2');
-            expect(testLog.appenders.length).to.be.equal(2);
-            expect(testLog.hasAppender('mem1'));
-            expect(testLog.hasAppender('mem2'));
+            var testLog = new Logger('1');
+            testLog.setAppender('mem1', {type: 'MemoryAppender'});
+            testLog.setAppender('mem2', {type: 'MemoryAppender'});
+            expect(testLog.listAppenders().length).to.be.equal(2);
+            expect(testLog.listAppenders()).contains('mem1');
+            expect(testLog.listAppenders()).contains('mem2');
         });
 
         it('should be able to have an appender removed', () => {
-            var testLog = new Logger();
-            Configuration.appenders.add('mem1', {type: 'memory'});
-            testLog.addAppender('mem1');
-            expect(testLog.appenders.length).to.be.equal(1);
+            var testLog = new Logger('2');
+            testLog.setAppender('mem1', {type: 'MemoryAppender'});
+            expect(testLog.listAppenders().length).to.be.equal(1);
             testLog.removeAppender('mem1');
-            expect(testLog.appenders.length).to.be.equal(0);
+            expect(testLog.listAppenders().length).to.be.equal(0);
         });
 
         it('should get an appender assigned when changing configuration', () => {
-            var testLog = Loggers.__get('testLog');
-            Configuration.appenders.add('mem1', { type: 'memory' });
-            testLog.addAppender('mem1');
-            expect(testLog.appenders.length).to.be.equal(1);
-            expect(testLog.hasAppender('mem1').type).to.be.equal('memory');
-            Configuration.appenders.mem1 = { type: 'console' };
-            expect(testLog.hasAppender('mem1').type).to.be.equal('console');
+            var testLog = new Logger('testLog');
+            testLog.setAppender('app1', {type: 'MemoryAppender'});
+            expect(testLog.listAppenders().length).to.equal(1);
+            testLog.setAppender('app1', {type: 'ConsoleAppender'});
+            expect(testLog.setAppender('app1').constructor.name).to.equal('ConsoleAppender');
+        });
+
+        it("should return a default logger instance", () => {
+            var testLog = new Logger("testDefault");
+
+            expect(testLog).to.be.an.object;
+            expect(testLog.error).to.be.a.function;
+            expect(testLog.warn).to.be.a.function;
+            expect(testLog.info).to.be.a.function;
+            expect(testLog.debug).to.be.a.function;
+            expect(testLog.trace).to.be.a.function;
+            expect(testLog.log).to.be.a.function;
+            expect(testLog.process).to.be.equal(process.pid);
+
+            expect(testLog.level).to.be.equal(Level.info);
+            expect(testLog.enabled).to.be.a.function;
+            expect(testLog.enabled(Level.error)).to.be.true;
+            expect(testLog.enabled(Level.warn)).to.be.true;
+            expect(testLog.enabled(Level.info)).to.be.true;
+            expect(testLog.enabled(Level.debug)).to.be.false;
+            expect(testLog.enabled(Level.trace)).to.be.false;
+
+            expect(testLog.name).to.be.a.function;
+            expect(testLog.config).to.be.a.function;
+        });
+
+        it("should return the same logger instance every time", () => {
+            var test1Log = new Logger("test1");
+            var test2Log = new Logger("test1");
+            expect(test1Log).to.be.deep.equal(test2Log);
+        });
+
+        it("should return a logger with the path of this file", () => {
+            var testLog = new Logger();
+
+            expect(testLog).to.be.an.object;
+            expect(testLog.name).to.be.equal(path.basename(__filename));
+        });
+    });
+
+    describe('#level', () => {
+        it("should get the default logger with a configuration parameter", () => {
+            var testLog = new Logger({
+                level: 'debug'
+            });
+
+            expect(testLog).to.be.an.object;
+            expect(testLog.enabled).to.be.an.object;
+            expect(testLog.level).to.be.equal(Level.debug);
+            expect(testLog.enabled(Level.error)).to.be.true;
+            expect(testLog.enabled(Level.warn)).to.be.true;
+            expect(testLog.enabled(Level.info)).to.be.true;
+            expect(testLog.enabled(Level.debug)).to.be.true;
+            expect(testLog.enabled(Level.trace)).to.be.false;
+        });
+
+        it("should change the log level dynamically directly on the logger", () => {
+            var testLog = new Logger('test3');
+
+            expect(testLog).to.be.an.object;
+            expect(testLog.level).to.be.equal(Level.info);
+            expect(testLog.enabled(Level.error)).to.be.true;
+            expect(testLog.enabled(Level.warn)).to.be.true;
+            expect(testLog.enabled(Level.info)).to.be.true;
+            expect(testLog.enabled(Level.debug)).to.be.false;
+            expect(testLog.enabled(Level.trace)).to.be.false;
+
+            testLog.config = {
+                level: 'debug'
+            };
+            expect(testLog.level).to.be.equal(Level.debug);
+            expect(testLog.enabled(Level.error)).to.be.true;
+            expect(testLog.enabled(Level.warn)).to.be.true;
+            expect(testLog.enabled(Level.info)).to.be.true;
+            expect(testLog.enabled(Level.debug)).to.be.true;
+            expect(testLog.enabled(Level.trace)).to.be.false;
         });
     });
 });

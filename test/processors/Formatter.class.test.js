@@ -1,10 +1,12 @@
-"use strict";
+'use strict';
 
 var expect = require('chai').expect;
+
 var Formatter = require('../../lib/processors/Formatter.class');
 var Event = require('../../lib/Event.class');
 var Level = require('../../lib/Level.class');
 var MDC = require('../../lib/MDC.class');
+
 
 describe("Formatter", () => {
     it("should format a message with a shorter log level", (done) => {

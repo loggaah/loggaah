@@ -1,21 +1,33 @@
-"use strict";
+'use strict';
 
-var moment = require('moment');
 var expect = require('chai').expect;
+var moment = require('moment');
 
-var Level = require("..").Level;
-var MDC = require("..").MDC;
 var Event = require('../lib/Event.class');
+var Level = require("../").Level;
+var MDC = require("../").MDC;
 
-describe("Message", () => {
-    it("should create a message", () => {
+describe("Event", () => {
+    it("should create an event with properties set in the constructor", () => {
         var mdc = new MDC();
         var error = new Error();
-        var event = new Event("test/class", Level.info, "test", mdc, error);
-        expect(event.level).to.equal(Level.info);
-        expect(event.message).to.equal("test");
-        expect(event.mdc).to.deep.equal(mdc);
-        expect(event.error).to.deep.equal(error);
+        var event = new Event("test/class", Level.info, "this %s a test", mdc, error, ["is"]);
+        expect(event.getLevel()).to.equal(Level.info);
+        expect(event.getMetadata()).to.deep.equal(mdc);
+        expect(event.getError()).to.deep.equal(error);
         expect(event.time).to.be.lte(moment());
+        expect(event.message).to.equal('this is a test');
+    });
+
+    it("should create an event using flow setter", () => {
+        var mdc = new MDC();
+        var error = new Error();
+        var event = new Event("test/class");
+        event.pattern("this %s a test").param('is').mdc(mdc).error(error).level(Level.WARN);
+        expect(event.getLevel()).to.equal(Level.warn);
+        expect(event.getMetadata()).to.deep.equal(mdc);
+        expect(event.getError()).to.deep.equal(error);
+        expect(event.time).to.be.lte(moment());
+        expect(event.message).to.equal('this is a test');
     });
 });

@@ -14,7 +14,9 @@ Yes this is another logging framework, because the world can never have enough l
 * Modifiable at runtime
 * Multiple configuration options: File, Rest, Web-Interface through plugins
 * Configurable log levels
-* Follows examples and idea of Log4j2/Logback in Java
+* Inspired by Log4j2/Logback in Java
+* Flow interface
+
 
 #### How do you use it? Easy:
 
@@ -62,36 +64,10 @@ log.error('Hope this', ex, MDC, 'helps');
 
 Change where logs are sent to:
 ```JavaScript
-logs.configuration.appenders.default = {
-    type: console,
-    color: true
-}
-```
-
-Or change it directly on the logger itself:
-```JavaScript
-log.addAppender('default', {
+log.setAppender('default', {
     type: console,
     color: true
 });
-```
-
-Change where loggaah will look for config files:
-```JavaScript
-logs.configuration.configurators.json =  {
-   files: ['my/path/to/my.config.json'],
-   rescan: 30 //seconds
-};
-```
-
-Add a processor to an appender:
-```JavaScript
-logs.configurations.processors.formatter = {
-    pattern: '[%d] %m%n'
-};
-logs.configuration.appenders.default = {
-    processors: 'formatter',
-};
 ```
 
 

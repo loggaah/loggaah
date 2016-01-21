@@ -1,6 +1,6 @@
 {
   "name": "loggaah",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "A logging framework for Node.js",
   "homepage": "https://github.com/loggaah/loggaah",
   "license": "Apache-2.0",
@@ -27,6 +27,10 @@
     "url": "https://github.com/loggaah/loggaah/issues",
     "email": "mallox@pyxzl.net"
   },
+  "dependencies": {
+    "lodash": "^4.0.0",
+    "moment": "^2.11.1"
+  },
   "devDependencies": {
     "chai": "^3.4.1",
     "coveralls": "^2.11.4",
@@ -43,9 +47,5 @@
     "test": "istanbul cover _mocha -- --recursive",
     "test-travis": "istanbul cover _mocha --report lcovonly -- -R spec --recursive",
     "doc": "jsdoc -c doc/jsdoc.json"
-  },
-  "dependencies": {
-    "lodash": "^3.10.1",
-    "moment": "^2.10.6"
   }
 }

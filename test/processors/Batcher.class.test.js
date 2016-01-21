@@ -1,9 +1,11 @@
-"use strict";
+'use strict';
 
 var expect = require('chai').expect;
+
 var Batcher = require('../../lib/processors/Batcher.class');
 var Event = require('../../lib/Event.class');
 var Level = require('../../lib/Level.class');
+
 
 describe('Batcher', () => {
     it('should batch 10 messages and then pass them on', (done) => {
@@ -13,10 +15,10 @@ describe('Batcher', () => {
         };
 
         for (let i = 0; i <= 10 ; i++) {
-            batcher.process([new Event('test/source', Level.INFO, i)], (events) => {
+            batcher.process([new Event('test/source').level(1).param(i)], (events) => {
                 expect(events.length).to.equal(10);
-                expect(events[0].message).to.equal(0);
-                expect(events[1].message).to.equal(1);
+                expect(events[0].message).to.equal('0');
+                expect(events[1].message).to.equal('1');
                 done();
             });
         }

@@ -1,8 +1,9 @@
-"use strict";
+'use strict';
 
 var expect = require('chai').expect;
 
-var Level = require('..').Level;
+var Level = require('../').Level;
+
 
 describe("Level.class", () => {
     it("should have the same level for different names", () => {
@@ -30,6 +31,8 @@ describe("Level.class", () => {
 
         expect(Level.OFF).to.equal(Level.off);
         expect(Level.OFF == 6).to.be.true;
+
+        expect(Level.DEBUG).to.not.equal(Level.INFO);
     });
 
     it("should get the right log level for a string", () => {
@@ -72,5 +75,13 @@ describe("Level.class", () => {
         expect(Level.parse("info")).to.equal(Level.info);
         expect(Level.parse(3)).to.equal(Level.info);
         expect(Level.parse(Level.INFO)).to.equal(Level.info);
-    })
+    });
+
+    it("should allow to use custom logging levels before a logger instance has been created", () => {
+        // TODO need to be able to clear current loggers
+    });
+
+    it("should throw an error if custom logging levels are set after loggers have been created", () => {
+        // TODO need to implement warning, when loggers have been created
+    });
 });

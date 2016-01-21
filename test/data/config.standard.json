@@ -22,13 +22,13 @@
   },
   "appenders": {
     "STDOUT": {
-      "type": "console",
-      "processors": "formatter",
+      "type": "ConsoleAppender",
+      "processors": "Formatter",
       "color": false
     },
     "appLog": {
-      "type": "file",
-      "processors": [ "formatter" ],
+      "type": "FileAppender",
+      "processors": [ "Formatter" ],
       "rollover": {
         "size": "100MB",
         "pattern": "yyyy-MM-dd"
@@ -41,9 +41,5 @@
       "match": "lib/.*",
       "appenders": [ "STDOUT" ]
     }
-  },
-  "root": {
-    "level": "info",
-    "appenders": "STDOUT"
   }
 }
