@@ -15,7 +15,7 @@ describe("Event", () => {
         expect(event.getLevel()).to.equal(Level.info);
         expect(event.getMetadata()).to.deep.equal(mdc);
         expect(event.getError()).to.deep.equal(error);
-        expect(event.time).to.be.lte(moment());
+        expect(event.getTime()).to.be.lte(moment());
         expect(event.message).to.equal('this is a test');
     });
 
@@ -27,7 +27,7 @@ describe("Event", () => {
         expect(event.getLevel()).to.equal(Level.warn);
         expect(event.getMetadata()).to.deep.equal(mdc);
         expect(event.getError()).to.deep.equal(error);
-        expect(event.time).to.be.lte(moment());
+        expect(event.getTime()).to.be.lte(moment());
         expect(event.message).to.equal('this is a test');
     });
 });

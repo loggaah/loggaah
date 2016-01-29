@@ -76,7 +76,7 @@ describe("Formatter", () => {
         mdc.set('test1', 123);
         var event = new Event("test/source", Level.INFO, "This is a test message", mdc);
         formatter.process([event], (events) => {
-            expect(events[0].message).to.equal(event.time.toISOString() + " [INFO] This is a test message test1=123");
+            expect(events[0].message).to.equal(event.getTime().toISOString() + " [INFO] This is a test message test1=123");
             done();
         });
     });
