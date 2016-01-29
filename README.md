@@ -70,6 +70,12 @@ log.setAppender('default', {
 });
 ```
 
+Use a unique id to identify this message later
+```JavaScript
+var hash = log.info('A message').param('a parameter').getId();
+// #A18dnJ0l or other hash
+```
+
 
 ## Installation
 Run the following command in the root of the project that you want to use the loggaah with.
