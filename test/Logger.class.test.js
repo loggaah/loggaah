@@ -39,30 +39,33 @@ describe('Logger', () => {
             var testLog = new Logger("testDefault");
 
             expect(testLog).to.be.an.object;
-            expect(testLog.error).to.be.a.function;
-            expect(testLog.warn).to.be.a.function;
-            expect(testLog.info).to.be.a.function;
-            expect(testLog.debug).to.be.a.function;
-            expect(testLog.trace).to.be.a.function;
-            expect(testLog.log).to.be.a.function;
+            expect(testLog.error).to.be.a('function');
+            expect(testLog.warn).to.be.a('function');
+            expect(testLog.info).to.be.a('function');
+            expect(testLog.debug).to.be.a('function');
+            expect(testLog.trace).to.be.a('function');
+            expect(testLog.log).to.be.a('function');
             expect(testLog.process).to.be.equal(process.pid);
 
             expect(testLog.level).to.be.equal(Level.info);
-            expect(testLog.enabled).to.be.a.function;
+            expect(testLog.enabled).to.be.a('function');
             expect(testLog.enabled(Level.error)).to.be.true;
             expect(testLog.enabled(Level.warn)).to.be.true;
             expect(testLog.enabled(Level.info)).to.be.true;
             expect(testLog.enabled(Level.debug)).to.be.false;
             expect(testLog.enabled(Level.trace)).to.be.false;
 
-            expect(testLog.name).to.be.a.function;
-            expect(testLog.config).to.be.a.function;
+            expect(testLog.name).to.equal('testDefault');
         });
 
-        it("should return the same logger instance every time", () => {
-            var test1Log = new Logger("test1");
-            var test2Log = new Logger("test1");
-            expect(test1Log).to.be.deep.equal(test2Log);
+        it("should throw an exception if you're trying to create the same logger twice", () => {
+            new Logger("test1");
+            try {
+                new Logger("test1");
+                expect.fail('Expected to see error thrown');
+            } catch (e) {
+                expect(e).to.be.instanceof(Error)
+            }
         });
 
         it("should return a logger with the path of this file", () => {
@@ -75,7 +78,7 @@ describe('Logger', () => {
 
     describe('#level', () => {
         it("should get the default logger with a configuration parameter", () => {
-            var testLog = new Logger({
+            var testLog = new Logger('test2', {
                 level: 'debug'
             });
 
