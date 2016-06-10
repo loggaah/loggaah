@@ -1,3 +1,4 @@
+/* global describe, it, beforeEach, afterEach */
 'use strict';
 
 var path = require('path');
@@ -12,8 +13,8 @@ describe('Logger', () => {
     describe('#appenders', () => {
         it('should be able to have multiple appenders assigned', () => {
             var testLog = new Logger('1');
-            testLog.setAppender('mem1', {type: 'MemoryAppender'});
-            testLog.setAppender('mem2', {type: 'MemoryAppender'});
+            testLog.setAppender('mem1', {type: 'Memory'});
+            testLog.setAppender('mem2', {type: 'Memory'});
             expect(testLog.listAppenders().length).to.be.equal(2);
             expect(testLog.listAppenders()).contains('mem1');
             expect(testLog.listAppenders()).contains('mem2');
@@ -21,7 +22,7 @@ describe('Logger', () => {
 
         it('should be able to have an appender removed', () => {
             var testLog = new Logger('2');
-            testLog.setAppender('mem1', {type: 'MemoryAppender'});
+            testLog.setAppender('mem1', {type: 'Memory'});
             expect(testLog.listAppenders().length).to.be.equal(1);
             testLog.removeAppender('mem1');
             expect(testLog.listAppenders().length).to.be.equal(0);
@@ -29,10 +30,10 @@ describe('Logger', () => {
 
         it('should get an appender assigned when changing configuration', () => {
             var testLog = new Logger('testLog');
-            testLog.setAppender('app1', {type: 'MemoryAppender'});
+            testLog.setAppender('app1', {type: 'Memory'});
             expect(testLog.listAppenders().length).to.equal(1);
-            testLog.setAppender('app1', {type: 'ConsoleAppender'});
-            expect(testLog.setAppender('app1').constructor.name).to.equal('ConsoleAppender');
+            testLog.setAppender('app1', {type: 'Console'});
+            expect(testLog.setAppender('app1').constructor.name).to.equal('Console');
         });
 
         it("should return a default logger instance", () => {
@@ -64,7 +65,7 @@ describe('Logger', () => {
                 new Logger("test1");
                 expect.fail('Expected to see error thrown');
             } catch (e) {
-                expect(e).to.be.instanceof(Error)
+                expect(e).to.be.instanceof(Error);
             }
         });
 

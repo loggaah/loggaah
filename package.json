@@ -28,8 +28,8 @@
     "email": "mallox@pyxzl.net"
   },
   "dependencies": {
-    "lodash": "^4.0.0",
-    "moment": "^2.11.1"
+    "lodash": "4.x",
+    "moment": "2.x"
   },
   "devDependencies": {
     "chai": "^3.4.1",

@@ -185,8 +185,8 @@ You can just run ```npm test``` to see an output of all existing tests as well a
 I try to find all the bugs and have tests to cover all cases, but since I'm working on this project alone, it's easy to 
 miss something. Also I'm trying to think of new features to implement, but most of the time I add new features because 
 someone asked me for it. So please report any bugs or feature request to mallox@pyxzl.net or file an issue directly on 
-[Github](https://github.com/loggaah/loggaah/issues). Before submitting a bug report specific to your
- problem, try running the same command and verbose mode `-v` so that I have some additional information to work with.
+[Github](https://github.com/loggaah/loggaah/issues). Before submitting a bug report specific to your problem, try running 
+the same command and verbose mode `-v` so that I have some additional information to work with.
 Thanks!
 
 ## Donations
