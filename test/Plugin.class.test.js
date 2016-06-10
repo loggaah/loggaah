@@ -15,7 +15,7 @@ describe('Plugin', () => {
             }
 
             var instance = new TestPlugin();
-            expect(instance.id).to.equal('TestPlugin')
+            expect(instance.id).to.equal('TestPlugin');
         });
     });
 });
