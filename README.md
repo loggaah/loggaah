@@ -8,7 +8,7 @@ Yes this is another logging framework, because the world can never have enough l
 
 #### What makes this one so special or even different from others? Let's see:
 
-* Written in ECMA 6 (does not require --harmony flag)
+* Written in ES6 (does not require --harmony flag)
 * Extensible plugin architecture
 * Simple configuration
 * Modifiable at runtime
@@ -26,12 +26,12 @@ var logs = require('loggaah');
 
 Get your logger:
 ```JavaScript
-ver log = logs.getLogger('myLogger'); 
+var log = logs.getLogger('myLogger'); 
 ```
 
 Or let loggaah detect your logger:
 ```JavaScript
-var log = logs.getLogger(); // name = path/to/current/file
+var log = logs.getLogger(); // name = current.file
 ```
 
 Log a message:
@@ -47,8 +47,8 @@ log.warn('Oh no!', ex);
 
 Log metadata:
 ```JavaScript
-var MDC = new logs.MDC();
-MDC.set('key', 'value');
+var MDC = new logs.MDC({ key1: 'value1' });
+MDC.set('key2', 'value2');
 log.debug('Juicy Details', MDC); 
 ```
 
@@ -65,7 +65,7 @@ log.error('Hope this', ex, MDC, 'helps');
 Change where logs are sent to:
 ```JavaScript
 log.setAppender('default', {
-    type: console,
+    type: 'Console',
     color: true
 });
 ```

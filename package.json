@@ -32,16 +32,16 @@
     "moment": "2.x"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
-    "coveralls": "^2.11.4",
-    "gently": "^0.10.0",
-    "istanbul": "^0.4.1",
-    "jsdoc": "^3.4.0",
-    "mocha": "^2.3.4",
-    "mocha-lcov-reporter": "^1.0.0"
+    "chai": "^3",
+    "coveralls": "^2",
+    "gently": "^0.10",
+    "istanbul": "^0.4",
+    "jsdoc": "^3",
+    "mocha": "^3",
+    "mocha-lcov-reporter": "^1"
   },
   "engine": {
-    "node": ">=5.0"
+    "node": ">=6.4"
   },
   "scripts": {
     "test": "istanbul cover _mocha -- --recursive",
