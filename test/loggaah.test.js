@@ -1,5 +1,4 @@
 /* global describe, it, beforeEach, afterEach */
-'use strict';
 
 var expect = require('chai').expect;
 
@@ -27,6 +26,8 @@ describe("loggaah", () => {
 
         it('should have a default configuration loaded', () => {
             expect(Object.keys(loggaah.Plugins.instances.appenders).length).to.equal(1);
+            expect(Object.keys(loggaah.Plugins.instances.processors).length).to.equal(1);
+            expect(Object.keys(loggaah.Plugins.instances.configurators).length).to.be.gte(3);
         });
     });
 
@@ -38,6 +39,7 @@ describe("loggaah", () => {
             let event = log.info('Hello World!');
             expect(event.message).to.equal('Hello World!');
             expect(event.getLevel().toString()).to.equal('INFO');
+            // TODO logging doesn't occur because no rules on the Core module have been found that apply a config
         });
     });
 });
