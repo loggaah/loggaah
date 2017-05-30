@@ -1,9 +1,8 @@
 /* global describe, it, beforeEach, afterEach */
-'use strict';
+const expect = require('chai').expect;
 
-var expect = require('chai').expect;
+const Plugins = require('../lib/Plugins.class');
 
-var Plugins = require('../lib/Plugins.class');
 
 describe('Plugin', () => {
     describe('Interface', () => {
@@ -14,7 +13,7 @@ describe('Plugin', () => {
                 }
             }
 
-            var instance = new TestPlugin();
+            let instance = new TestPlugin();
             expect(instance.id).to.equal('TestPlugin');
         });
     });

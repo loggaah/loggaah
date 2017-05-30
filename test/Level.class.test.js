@@ -1,9 +1,7 @@
 /* global describe, it, beforeEach, afterEach */
-'use strict';
+const expect = require('chai').expect;
 
-var expect = require('chai').expect;
-
-var Level = require('../').Level;
+const Level = require('../').Level;
 
 
 describe("Level.class", () => {

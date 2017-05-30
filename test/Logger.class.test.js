@@ -1,18 +1,15 @@
 /* global describe, it, beforeEach, afterEach */
-'use strict';
+const expect = require('chai').expect;
+const path = require('path');
 
-var path = require('path');
-
-var expect = require('chai').expect;
-
-var Level = require('../lib/Level.class');
-var Logger = require('../lib/Logger.class');
+const Level = require('../lib/Level.class');
+const Logger = require('../lib/Logger.class');
 
 
 describe('Logger', () => {
     describe('#appenders', () => {
         it('should be able to have multiple appenders assigned', () => {
-            var testLog = new Logger('1');
+            let testLog = new Logger('1');
             testLog.setAppender('mem1', {type: 'Memory'});
             testLog.setAppender('mem2', {type: 'Memory'});
             expect(testLog.listAppenders().length).to.be.equal(2);
@@ -21,7 +18,7 @@ describe('Logger', () => {
         });
 
         it('should be able to have an appender removed', () => {
-            var testLog = new Logger('2');
+            let testLog = new Logger('2');
             testLog.setAppender('mem1', {type: 'Memory'});
             expect(testLog.listAppenders().length).to.be.equal(1);
             testLog.removeAppender('mem1');
@@ -29,7 +26,7 @@ describe('Logger', () => {
         });
 
         it('should get an appender assigned when changing configuration', () => {
-            var testLog = new Logger('testLog');
+            let testLog = new Logger('testLog');
             testLog.setAppender('app1', {type: 'Memory'});
             expect(testLog.listAppenders().length).to.equal(1);
             testLog.setAppender('app1', {type: 'Console'});
@@ -37,7 +34,7 @@ describe('Logger', () => {
         });
 
         it("should return a default logger instance", () => {
-            var testLog = new Logger("testDefault");
+            let testLog = new Logger("testDefault");
 
             expect(testLog).to.be.an.object;
             expect(testLog.error).to.be.a('function');
@@ -70,7 +67,7 @@ describe('Logger', () => {
         });
 
         it("should return a logger with the path of this file", () => {
-            var testLog = new Logger();
+            let testLog = new Logger();
 
             expect(testLog).to.be.an.object;
             expect(testLog.name).to.be.equal(path.basename(__filename));
@@ -79,7 +76,7 @@ describe('Logger', () => {
 
     describe('#level', () => {
         it("should get the default logger with a configuration parameter", () => {
-            var testLog = new Logger('test2', {
+            let testLog = new Logger('test2', {
                 level: 'debug'
             });
 
@@ -94,7 +91,7 @@ describe('Logger', () => {
         });
 
         it("should change the log level dynamically directly on the logger", () => {
-            var testLog = new Logger('test3');
+            let testLog = new Logger('test3');
 
             expect(testLog).to.be.an.object;
             expect(testLog.level).to.be.equal(Level.info);

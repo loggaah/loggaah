@@ -1,10 +1,8 @@
-'use strict';
-
-var Core = require('./lib/Core.class');
-var Level = require('./lib/Level.class');
-var MDC = require('./lib/MDC.class');
-var Plugins = require('./lib/Plugins.class');
-var Logger = require('./lib/Logger.class');
+const Core = require('./lib/Core.class');
+const Level = require('./lib/Level.class');
+const MDC = require('./lib/MDC.class');
+const Plugins = require('./lib/Plugins.class');
+const Logger = require('./lib/Logger.class');
 
 /**
  * Entry point for external systems that want to use this library.

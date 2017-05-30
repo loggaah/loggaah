@@ -1,5 +1,4 @@
 /* global describe, it, beforeEach, afterEach */
-'use strict';
 
 describe('FileAppender', () => {
     describe('#append()', () => {

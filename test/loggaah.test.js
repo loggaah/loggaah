@@ -1,8 +1,7 @@
 /* global describe, it, beforeEach, afterEach */
+const expect = require('chai').expect;
 
-var expect = require('chai').expect;
-
-var loggaah = require('../');
+const loggaah = require('../');
 
 
 describe("loggaah", () => {
@@ -33,7 +32,7 @@ describe("loggaah", () => {
 
     describe('Examples', () => {
         it('should create a simple logger with reasonable default values', () => {
-            var log = loggaah.getLogger();
+            let log = loggaah.getLogger();
             expect(log.name).to.equal('loggaah.test.js');
             expect(log.info).to.be.a('function');
             let event = log.info('Hello World!');
