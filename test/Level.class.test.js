@@ -56,10 +56,10 @@ describe("Level.class", () => {
     });
 
     it("should prioritize levels correctly", () => {
-        expect(Level.trace).to.be.lt(Level.debug);
-        expect(Level.debug).to.be.lt(Level.info);
-        expect(Level.info).to.be.lt(Level.warn);
-        expect(Level.warn).to.be.lt(Level.error);
+        expect(Level.trace < Level.debug).to.be.true;
+        expect(Level.debug < Level.info).to.be.true;
+        expect(Level.info < Level.warn).to.be.true;
+        expect(Level.warn < Level.error).to.be.true;
     });
 
     it("should print level names out properly", () => {

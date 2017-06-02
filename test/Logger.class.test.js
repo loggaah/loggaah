@@ -36,7 +36,7 @@ describe('Logger', () => {
         it("should return a default logger instance", () => {
             let testLog = new Logger("testDefault");
 
-            expect(testLog).to.be.an.object;
+            expect(testLog).to.be.an('object');
             expect(testLog.error).to.be.a('function');
             expect(testLog.warn).to.be.a('function');
             expect(testLog.info).to.be.a('function');
@@ -69,7 +69,7 @@ describe('Logger', () => {
         it("should return a logger with the path of this file", () => {
             let testLog = new Logger();
 
-            expect(testLog).to.be.an.object;
+            expect(testLog).to.be.an('object');
             expect(testLog.name).to.be.equal(path.basename(__filename));
         });
     });
@@ -80,8 +80,8 @@ describe('Logger', () => {
                 level: 'debug'
             });
 
-            expect(testLog).to.be.an.object;
-            expect(testLog.enabled).to.be.an.object;
+            expect(testLog).to.be.an('object');
+            expect(testLog.enabled).to.be.a('function');
             expect(testLog.level).to.be.equal(Level.debug);
             expect(testLog.enabled(Level.error)).to.be.true;
             expect(testLog.enabled(Level.warn)).to.be.true;
@@ -93,7 +93,7 @@ describe('Logger', () => {
         it("should change the log level dynamically directly on the logger", () => {
             let testLog = new Logger('test3');
 
-            expect(testLog).to.be.an.object;
+            expect(testLog).to.be.an('object');
             expect(testLog.level).to.be.equal(Level.info);
             expect(testLog.enabled(Level.error)).to.be.true;
             expect(testLog.enabled(Level.warn)).to.be.true;

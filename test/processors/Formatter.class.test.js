@@ -130,7 +130,7 @@ describe("Formatter", () => {
 
         let event = new Event("test/source", Level.INFO, "test");
         formatter.process([event], (events) => {
-            expect(events[0].message).to.be.within(1, 100000);
+            expect(parseInt(events[0].message)).to.be.within(1, 100000);
             done();
         });
     });
