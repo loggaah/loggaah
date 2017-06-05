@@ -3,4 +3,5 @@ node_js:
   - "8.0"
 os:
   - linux
-after_success: npm run coverage
+  - osx
+after_success: test $TRAVIS_OS_NAME = "linux" && npm run coverage

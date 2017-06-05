@@ -28,8 +28,8 @@
     "email": "mallox@pyxzl.net"
   },
   "dependencies": {
-    "lodash": "4.x",
-    "moment": "2.x"
+    "lodash": "^4",
+    "moment": "^2"
   },
   "devDependencies": {
     "chai": "^4",
@@ -37,7 +37,7 @@
     "gently": "^0.10",
     "jsdoc": "^3",
     "mocha": "^3",
-    "nyc": "^11"
+    "nyc": "^11.0.2"
   },
   "engine": {
     "node": ">=8.0"
